@@ -19,7 +19,7 @@ Example:
         }
         ];
 
-	for (var i = 0; i < elementsToTrack.length; i++) {
+	 for (var i = 0; i < elementsToTrack.length; i++) {
   
 	    var el = elementsToTrack[i];
 		
@@ -35,6 +35,6 @@ Example:
 
 	    });
 
-	} 
+	 } 
   
   No HTML update is neccessary! Works with the existing HTML.
