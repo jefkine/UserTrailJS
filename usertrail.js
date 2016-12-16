@@ -36,7 +36,6 @@ UserTrail.prototype = {
 	// initialization within the prototype
 	protInit: function (config) {
 
-		this.tracks 		 =  []; // the records
 		this.sessUID             =  singletonSessUID,
 		this.sessLoadTime 	 =  new Date();
 		this.trackingCount       =  Number.isInteger(config.trackingCount) ? config.trackingCount : 1,
@@ -123,11 +122,11 @@ UserTrail.prototype = {
 
  	}, // EOF attach individual event to be tracked
 
-	// log track object into tracks records array
+	// compose a track log to be sent out as a trackPacket
 	protLogTrack: function (e, type)
 	{
 
-		 var trail = this,
+		var trail = this,
 
 		// trackPack object
 		trackPack =
@@ -161,10 +160,10 @@ UserTrail.prototype = {
 
 		return this;
 
-	}, // EOF log track object into tracks records array
+	}, // EOF compose a track log to be sent out as a trackPacket
 
 
-	// log session siganture
+	// compose a session siganture log to be sent out as a sessionSignaturePacket
 	protLogSessSignature: function (type)
 	{
 
@@ -205,7 +204,7 @@ UserTrail.prototype = {
 
 		return this;
 
-	}, // EOF log session siganture
+	}, // EOF compose a session siganture log to be sent out as a sessionSignaturePacket
 
 	// send packets(s) to server
 	protsendTrackPacket: function (trackPacket, packetType)
