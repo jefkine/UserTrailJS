@@ -4,7 +4,7 @@ You can track a user's activities on your page by element classes and element id
 
 Example:
 
-        var elementsToTrack = [
+	var elementsToTrack = [
 		{
 		  element     : "input-1",
 		  events      : ["mouseup", "touchend"],
@@ -17,13 +17,13 @@ Example:
 		  eventType   : "tracking", // can be ignored
 		  elementType : "id"        // can be ignored
 		}
-        ];
+	];
 
 	for (var i = 0; i < elementsToTrack.length; i++)
 	{
-  
+
 	    var el = elementsToTrack[i];
-		
+
 	    new UserTrail({
 
 	      trackingCount       : i,
