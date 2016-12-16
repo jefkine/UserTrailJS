@@ -40,12 +40,12 @@ UserTrail.prototype = {
 		this.sessUUID            =  singletonSessUUID,
 		this.sessLoadTime 	 =  new Date();
 		this.trackingCount       =  Number.isInteger(config.trackingCount) ? config.trackingCount : 1,
-		this.trackingEvents	 =  Array.isArray(config.trackingEvents)	=== true ? config.trackingEvents : ['mouseup', 'mousedown'],
-		this.trackingElement     =  typeof(config.trackingElement)	== "string"	? config.trackingElement : 'tracker',
+		this.trackingEvents	 =  Array.isArray(config.trackingEvents) === true ? config.trackingEvents : ['mouseup', 'mousedown'],
+		this.trackingElement     =  typeof(config.trackingElement) == "string"	? config.trackingElement : 'tracker',
 		this.sessApiEndpoint 	 =  typeof(config.sessApiEndpoint) == "string" ? config.sessApiEndpoint : 'http://127.0.0.1/your/app/endpoint',
                 this.trackApiEndpoint 	 =  typeof(config.trackApiEndpoint) == "string" ? config.trackApiEndpoint : 'http://127.0.0.1/your/app/endpoint',
-		this.trackingEventType   =  typeof(config.trackingEventType)	== "string"	? config.trackingEventType : 'tracking', // either tracking or conversion
-		this.trackingElementType =  typeof(config.trackingElementType)	== "string"	? config.trackingElementType : 'cssClass', // either cssClass or id
+		this.trackingEventType   =  typeof(config.trackingEventType) == "string" ? config.trackingEventType : 'tracking', // either tracking or conversion
+		this.trackingElementType =  typeof(config.trackingElementType) == "string" ? config.trackingElementType : 'cssClass', // either cssClass or id
 
 		this.protAttachEvents(); // attach events
 
