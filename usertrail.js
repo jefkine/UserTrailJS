@@ -37,7 +37,7 @@ UserTrail.prototype = {
 	protInit: function (config) 
 	{
 
-		this.sessUID             =  singletonSessUID,
+		this.sessUUID            =  singletonSessUUID,
 		this.sessLoadTime 	 =  new Date();
 		this.trackingCount       =  Number.isInteger(config.trackingCount) ? config.trackingCount : 1,
 		this.trackingEvents	 =  Array.isArray(config.trackingEvents)	=== true ? config.trackingEvents : ['mouseup', 'mousedown'],
@@ -133,7 +133,7 @@ UserTrail.prototype = {
 		// trackPack object
 		trackPack = {
 
-			sessionID       : trail.sessUID,
+			sessionID       : trail.sessUUID,
 			trackID         : UUIDV4.getUUIDV4(),
 			type 		: type,
 			event 		: e.type,
@@ -173,7 +173,7 @@ UserTrail.prototype = {
 		// Generate Session Data Object
 		sessPack = {
 
-			sessionID   : trail.sessUID,
+			sessionID   : trail.sessUUID,
 			sessionType : type,
 			loadTime    : trail.sessLoadTime,
 			unloadTime  : type == 'closing' ? new Date() : '1979-10-10 10:10:10',
@@ -259,4 +259,4 @@ var UUIDV4 = new function()
 }; // EOF generate UUID V4 object
 
 
-var singletonSessUID = UUIDV4.getUUIDV4(); // generate singleton session id for the user in session
+var singletonSessUUID = UUIDV4.getUUIDV4(); // generate singleton session id for the user in session
