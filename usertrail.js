@@ -34,7 +34,8 @@ var UserTrail = function (config)
 UserTrail.prototype = {
 
 	// initialization within the prototype
-	protInit: function (config) {
+	protInit: function (config) 
+	{
 
 		this.sessUID             =  singletonSessUID,
 		this.sessLoadTime 	 =  new Date();
@@ -59,7 +60,8 @@ UserTrail.prototype = {
 
 
 	// attach events to be tracked
-	protAttachEvents: function () {
+	protAttachEvents: function () 
+	{
 
 		var trail = this;
 
@@ -129,8 +131,7 @@ UserTrail.prototype = {
 		var trail = this,
 
 		// trackPack object
-		trackPack =
-		{
+		trackPack = {
 
 			sessionID       : trail.sessUID,
 			trackID         : UUIDV4.getUUIDV4(),
@@ -170,8 +171,7 @@ UserTrail.prototype = {
 		var trail = this,
 
 		// Generate Session Data Object
-		sessPack =
-		{
+		sessPack = {
 
 			sessionID   : trail.sessUID,
 			sessionType : type,
