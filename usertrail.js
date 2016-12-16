@@ -62,7 +62,7 @@ UserTrail.prototype = {
 	// attach events to be tracked
 	protAttachEvents: function () {
 
-		var trail	= this;
+		var trail = this;
 
 		if (trail.trackingEventType == "tracking") // check the event type [track or conversion]
 		{
@@ -70,38 +70,36 @@ UserTrail.prototype = {
 			for (var i = 0; i < trail.trackingEvents.length; i++)
 			{
 
-					var tEvent	= trail.trackingEvents[i];
+				var tEvent = trail.trackingEvents[i];
 
-					if (trail.trackingElementType == "cssClass") // check the element type [cssClass or id]
+				if (trail.trackingElementType == "cssClass") // check the element type [cssClass or id]
+				{
+
+					targets = document.getElementsByClassName(trail.trackingElement);
+					for (var j = 0; j < targets.length; j++)
 					{
 
-						targets = document.getElementsByClassName(trail.trackingElement);
-
-						for (var j = 0; j < targets.length; j++)
-						{
-
-							trail.protAttachEvent(targets[j], tEvent, function (e)
-							{
-								e.stopPropagation ? e.stopPropagation() : (e.cancelBubble = true)
-								trail.protLogTrack(e, trail.trackingEventType);
-							});
-
-					  }
-
-					}
-					else if (trail.trackingElementType == "id")
-					{
-
-						target = document.getElementById(trail.trackingElement);
-
-						trail.protAttachEvent(target, tEvent, function (e)
+						trail.protAttachEvent(targets[j], tEvent, function (e)
 						{
 							e.stopPropagation ? e.stopPropagation() : (e.cancelBubble = true)
 							trail.protLogTrack(e, trail.trackingEventType);
 						});
 
-					}
-					// EOF check the element type [cssClass or id]
+					  }
+
+				}
+				else if (trail.trackingElementType == "id")
+				{
+
+					target = document.getElementById(trail.trackingElement);
+					trail.protAttachEvent(target, tEvent, function (e)
+					{
+						e.stopPropagation ? e.stopPropagation() : (e.cancelBubble = true)
+						trail.protLogTrack(e, trail.trackingEventType);
+					});
+
+				}
+				// EOF check the element type [cssClass or id]
 
 			}
 
@@ -131,28 +129,28 @@ UserTrail.prototype = {
 
 		 var trail = this,
 
-			// trackPack object
-			trackPack 	=
-			{
+		// trackPack object
+		trackPack =
+		{
 
-				sessionID : trail.sessUID,
-				trackID   : UUIDV4.getUUIDV4(),
-				type 			: type,
-				event 			: e.type,
-				targetId    : e.target.id,
-				targetTag 		: e.target.tagName,
-				targetClasses 	: trail.trackingElement,
-				clientPosition  : {
-					x 				: e.clientX,
-					y 				: e.clientY
-				},
-				screenPosition 	: {
-					x 				: e.screenX,
-					y 				: e.screenY
-				},
-				trackCreatedAt 		: new Date()
+			sessionID       : trail.sessUID,
+			trackID         : UUIDV4.getUUIDV4(),
+			type 		: type,
+			event 		: e.type,
+			targetId        : e.target.id,
+			targetTag 	: e.target.tagName,
+			targetClasses 	: trail.trackingElement,
+			clientPosition  : {
+				x : e.clientX,
+				y : e.clientY
+			},
+			screenPosition 	: {
+				x : e.screenX,
+				y : e.screenY
+			},
+			trackCreatedAt 	: new Date()
 
-			};
+		};
 
 		console.log(JSON.stringify(trackPack));
 
@@ -170,7 +168,7 @@ UserTrail.prototype = {
 	protLogSessSignature: function (type)
 	{
 
-		var trail 	= this,
+		var trail = this,
 
 		// Generate Session Data Object
 		sessPack =
@@ -178,23 +176,23 @@ UserTrail.prototype = {
 
 			sessionID   : trail.sessUID,
 			sessionType : type,
-			loadTime 		: trail.sessLoadTime,
-			unloadTime 	: type	== 'closing' ? new Date() : '1979-10-10 10:10:10',
-			language 		: window.navigator.language,
-			platform 		: window.navigator.platform,
-			port 			  : window.location.port,
-			client 			: {
-				name 		: window.navigator.appVersion,
-				innerWidth 	: window.innerWidth,
-				innerHeight 	: window.innerHeight,
-				outerWidth 	: window.outerWidth,
-				outerHeight 	: window.outerHeight
+			loadTime    : trail.sessLoadTime,
+			unloadTime  : type == 'closing' ? new Date() : '1979-10-10 10:10:10',
+			language    : window.navigator.language,
+			platform    : window.navigator.platform,
+			port 	    : window.location.port,
+			client 	    : {
+				name 	    : window.navigator.appVersion,
+				innerWidth  : window.innerWidth,
+				innerHeight : window.innerHeight,
+				outerWidth  : window.outerWidth,
+				outerHeight : window.outerHeight
 			},
-			page 			: {
-				location 	: window.location.pathname,
-				href 		: window.location.href,
-				origin 		: window.location.origin,
-				pageTitle 	: document.title
+			page 	    : {
+				location  : window.location.pathname,
+				href 	  : window.location.href,
+				origin 	  : window.location.origin,
+				pageTitle : document.title
 			},
 
 		};
@@ -243,21 +241,21 @@ var UUIDV4 = new function()
 {
 
     this.getUUIDV4 = function ()
-		{
-	    var nbr, randStr = "";
-	    do
-			{
-	        randStr += (nbr = Math.random()).toString(16).substr(2);
-	    } while (randStr.length < 30);
-	    return [
-	        randStr.substr(0, 8), "-",
-	        randStr.substr(8, 4), "-4",
-	        randStr.substr(12, 3), "-",
-	        ((nbr*4|0)+8).toString(16),
-	        randStr.substr(15, 3), "-",
-	        randStr.substr(18, 12)
-	        ].join("");
-	  }
+    {
+    	var nbr, randStr = "";
+	do
+	{
+		randStr += (nbr = Math.random()).toString(16).substr(2);
+	} while (randStr.length < 30);
+	return [
+			randStr.substr(0, 8), "-",
+			randStr.substr(8, 4), "-4",
+			randStr.substr(12, 3), "-",
+			((nbr*4|0)+8).toString(16),
+			randStr.substr(15, 3), "-",
+			randStr.substr(18, 12)
+		].join("");
+	}
 
 }; // EOF generate UUID V4 object
 
