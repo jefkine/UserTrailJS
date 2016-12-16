@@ -26,24 +26,24 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-var Trail = function (config)
+var UserTrail = function (config)
 {
 	this.protInit(config); // initialize at object instantiation
 };
 
-Trail.prototype = {
+UserTrail.prototype = {
 
 	// initialization within the prototype
 	protInit: function (config) {
 
-		this.tracks 			       =  []; // the records
+		this.tracks 		 =  []; // the records
 		this.sessUID             =  singletonSessUID,
-		this.sessLoadTime 	     =  new Date();
+		this.sessLoadTime 	 =  new Date();
 		this.trackingCount       =  Number.isInteger(config.trackingCount) ? config.trackingCount : 1,
-		this.trackingEvents	     =  Array.isArray(config.trackingEvents)	=== true ? config.trackingEvents : ['mouseup', 'mousedown'],
+		this.trackingEvents	 =  Array.isArray(config.trackingEvents)	=== true ? config.trackingEvents : ['mouseup', 'mousedown'],
 		this.trackingElement     =  typeof(config.trackingElement)	== "string"	? config.trackingElement : 'tracker',
-		this.sessApiEndpoint 	   =  typeof(config.sessApiEndpoint) == "string" ? config.sessApiEndpoint : 'http://127.0.0.1/your/app/endpoint',
-    this.trackApiEndpoint 	 =  typeof(config.trackApiEndpoint) == "string" ? config.trackApiEndpoint : 'http://127.0.0.1/your/app/endpoint',
+		this.sessApiEndpoint 	 =  typeof(config.sessApiEndpoint) == "string" ? config.sessApiEndpoint : 'http://127.0.0.1/your/app/endpoint',
+                this.trackApiEndpoint 	 =  typeof(config.trackApiEndpoint) == "string" ? config.trackApiEndpoint : 'http://127.0.0.1/your/app/endpoint',
 		this.trackingEventType   =  typeof(config.trackingEventType)	== "string"	? config.trackingEventType : 'tracking', // either tracking or conversion
 		this.trackingElementType =  typeof(config.trackingElementType)	== "string"	? config.trackingElementType : 'cssClass', // either cssClass or id
 
@@ -118,10 +118,10 @@ Trail.prototype = {
 	}, // EOF attach events to be tracked
 
 	// attach individual event to be tracked
-  protAttachEvent: function (element, customEvent, fnc)
+        protAttachEvent: function (element, customEvent, fnc)
 	{
 
-			return ((element.attachEvent) ? element.attachEvent('on' + customEvent, fnc) : element.addEventListener(customEvent, fnc, false));
+		return ((element.attachEvent) ? element.attachEvent('on' + customEvent, fnc) : element.addEventListener(customEvent, fnc, false));
 
  	}, // EOF attach individual event to be tracked
 
@@ -172,38 +172,38 @@ Trail.prototype = {
 
 		var trail 	= this,
 
-			// Generate Session Data Object
-			sessPack 		=
-			{
+		// Generate Session Data Object
+		sessPack =
+		{
 
-				sessionID   : trail.sessUID,
-				sessionType : type,
-				loadTime 		: trail.sessLoadTime,
-				unloadTime 	: type	== 'closing' ? new Date() : '1979-10-10 10:10:10',
-				language 		: window.navigator.language,
-				platform 		: window.navigator.platform,
-				port 			  : window.location.port,
-				client 			: {
-					name 			    : window.navigator.appVersion,
-					innerWidth 		: window.innerWidth,
-					innerHeight 	: window.innerHeight,
-					outerWidth 		: window.outerWidth,
-					outerHeight 	: window.outerHeight
-				},
-				page 			: {
-					location 		: window.location.pathname,
-					href 			  : window.location.href,
-					origin 			: window.location.origin,
-					pageTitle 	: document.title
-				},
+			sessionID   : trail.sessUID,
+			sessionType : type,
+			loadTime 		: trail.sessLoadTime,
+			unloadTime 	: type	== 'closing' ? new Date() : '1979-10-10 10:10:10',
+			language 		: window.navigator.language,
+			platform 		: window.navigator.platform,
+			port 			  : window.location.port,
+			client 			: {
+				name 		: window.navigator.appVersion,
+				innerWidth 	: window.innerWidth,
+				innerHeight 	: window.innerHeight,
+				outerWidth 	: window.outerWidth,
+				outerHeight 	: window.outerHeight
+			},
+			page 			: {
+				location 	: window.location.pathname,
+				href 		: window.location.href,
+				origin 		: window.location.origin,
+				pageTitle 	: document.title
+			},
 
-			};
+		};
 
-			console.log(JSON.stringify(sessPack));
+		console.log(JSON.stringify(sessPack));
 
-			trail.protsendTrackPacket(sessPack,'sess');
+		trail.protsendTrackPacket(sessPack,'sess');
 
-			console.log(type+" session siganture data has been sent");
+		console.log(type+" session siganture data has been sent");
 
 		return this;
 
