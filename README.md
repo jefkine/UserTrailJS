@@ -1,6 +1,6 @@
 # UserTrailJS
 
-You can track a user's activities on your page by element classes and element ids already on your page. Use elementsToTrack array to set up specific elements to be tracked.
+You can track a user's activities on your page by element classes and element ids already on your page. Use the elementsToTrack array to set up specific elements to be tracked.
 
 Example:
 
